@@ -25,8 +25,9 @@ jobs:
         python -m venv env
         .\env\Scripts\activate
         pip install -r requirements.txt
+        
     - name: Zip the application files
-      run: zip -r myapp.zip .
+      run: Compress-Archive .\* myapp.zip
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
@@ -34,4 +35,4 @@ jobs:
         app-name: 'freeberg-windows'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ef03709243e947c6b782b4b7d634f26b }}
-        package: './myapp.zip'
+        package: '.\myapp.zip'
